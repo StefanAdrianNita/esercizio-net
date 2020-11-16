@@ -20,24 +20,24 @@ String ip=" ";
 int i=-1;
 while(ip!=null && ip!=ipDestinatario){
 i=i++;
-ip=Server.lista[i].Clientip;
+ip=Server.lista[i].getip;
 }
 if(ip==ipDestinatario){
-Server.lista[i].inviaMessaggio("RECIVE FROM "+ipMittente+" "+messaggioInAttesa);
+Server.lista[i].inviaMessaggio("Sent RECIVE FROM "+ipMittente+" "+messaggioInAttesa);
 i=-1;
 while(ip!=ipMittente){
     i=i++;
-    ip=Server.lista[i].Clientip;
+    ip=Server.lista[i].getip;
     }
-    Server.lista[i].inviaMessaggio("MESSAGE SENT");
+    Server.lista[i].inviaMessaggio("Sent MESSAGE SENT");
 }
 else{
     i=-1;
     while(ip!=ipMittente){
         i=i++;
-        ip=Server.lista[i].Clientip;
+        ip=Server.lista[i].getip;
         }
-        Server.lista[i].inviaMessaggio("CONN_REFUSED");
+        if(ip==null)Server.lista[i].inviaMessaggio("sent HOST UNREACHABLE");
     }  
 }
     }
