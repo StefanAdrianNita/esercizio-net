@@ -1,11 +1,11 @@
 package Server;
 
 public class SenderReceiver {
-    //Attributi
+    //ATTRIBUTI
     private String messaggioInAttesa;
     private String ipDestinatario;
     private String ipMittente;
-    //Metodi
+    //METODI
     public void riceviDaMittente(String msg,String ip){ //VIENE CHIAMATO DAL SERVERTHREAD MITTENTE
     int num=msg.indexOf(" ");
     ipDestinatario=msg.substring(0,num-1);
@@ -15,27 +15,27 @@ public class SenderReceiver {
     inviaADestinatario();
 }
 
-    private void inviaADestinatario(){ //VIENE CHIAMATO DA riceviDaMittente();
-String ip=" ";
-int i=-1;
-while(ip!=null && ip!=ipDestinatario){
-i=i++;
-ip=Server.lista[i].getip;
-}
-if(ip==ipDestinatario){
-Server.lista[i].inviaMessaggio("Sent RECIVE FROM "+ipMittente+" "+messaggioInAttesa);
-i=-1;
-while(ip!=ipMittente){
+    private void inviaADestinatario(){ //VIENE CHIAMATO DA riceviDaMittente() GESTISTE E INVIA MESSAGGI AL CLIENT MITTENTE E DESTINATARIO  
+    String ip=" ";
+    int i=-1;
+    while(ip!=null && ip!=ipDestinatario){
     i=i++;
-    ip=Server.lista[i].getip;
+    ip=Server.lista[i].getip();
+}
+    if(ip==ipDestinatario){
+    Server.lista[i].inviaMessaggio("Sent RECIVE FROM "+ipMittente+" "+messaggioInAttesa);
+    i=-1;
+    while(ip!=ipMittente){
+    i=i++;
+    ip=Server.lista[i].getip();
     }
     Server.lista[i].inviaMessaggio("Sent MESSAGE SENT");
 }
-else{
+    else{
     i=-1;
     while(ip!=ipMittente){
         i=i++;
-        ip=Server.lista[i].getip;
+        ip=Server.lista[i].getip();
         }
         if(ip==null)Server.lista[i].inviaMessaggio("sent HOST UNREACHABLE");
     }  

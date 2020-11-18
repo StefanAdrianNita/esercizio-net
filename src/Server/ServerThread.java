@@ -1,38 +1,59 @@
 package Server;
-import java.net.*;
+import java.net.*;                          //Packaging e Import classi Java necessarie
 import java.io.*;
 
 public class ServerThread extends Thread
 {
-private Socket socket;
-private String ClientIp;
-private String msg;
+                                            //Attributi
 
-public ServerThread(Socket s,String ip) { socket=s;ClientIp=ip;  }
+    private Socket socket;
+    private String ClientIp;
+    private String msg;
+    private Timer t;
+    private SenderReciever sr=new SenderReciever();
+    private PrintWriter pw;
+    private boolean fine;
 
-public String getIp(){
+                                            //Metodi+Costruttore
+
+public ServerThread(Socket s,String ip) { socket=s;ClientIp=ip;}
+
+public String getIp(){                      //Serve per ottenere l'ip dato che è un attributo privatp
     return ClientIp;
 }
 
-public void msgReceive(){
-    int num=msg.indexOf(" ");
-    msg.substring(num+1);
-    SenderReceiver.riceviDaMittente(msg,getIp);
+public void Stop(){                         //Ferma il Server e libera l'indirizzo ip
+    inviaMessaggio("SENT TIMEOUT");
+    fine=true;
+    ClientIp=null;
+}
+
+public void inviaMessaggio(String msg2){    //Invia un messaggio al Client collegato
+    t=new Timer(this);t.start();
+    int num=msg2.indexOf(" ");
+    msg2.substring(num+1);
+    pw.println(msg2);
 }
 
 
-public void run()
+public void run()                           //Crea il Timer,il BufferedReader e il PrintWriter,gestisce i vari messaggi
 {
-boolean fine=false;
+    fine=false;
+    t=new Timer(this);t.start();
 try
 {
-BufferedReader br=new BufferedReader(new
-InputStreamReader(socket.getInputStream()));
-PrintWriter pw=new PrintWriter(socket.getOutputStream());
-
-msg=br.readLine();
-
-br.close(); pw.close(); socket.close();
-}catch(IOException e){System.out.println("Problema di rete");}
+    BufferedReader br=new BufferedReader(new
+    InputStreamReader(socket.getInputStream()));
+    pw=new PrintWriter(socket.getOutputStream());
+while(!fine){
+    msg=br.readLine();
+    if(msg.equals("quit")||msg.equals("Quit")||msg.equals("QUIT"))
+        fine=true;
+        if(msg!=null)
+            sr.riceviDaMittente(msg, ClientIp);
+}
+    br.close(); pw.close(); socket.close();
+}
+    catch(IOException e){System.out.println("Problema di rete");}
 }
 }

@@ -11,8 +11,8 @@
 #### Package Server
 
 - Server.java -- Eduard Lucas (Co. Nita)
-- ServerThread.java -- Davide Antonica
-- SenderReciever.java -- Luca Tommasi (Co. Antonica)
+- ServerThread.java -- Luca Tommasi (Co. Antonica)
+- SenderReciever.java -- Davide Antonica
 
 #### Package Client
 
