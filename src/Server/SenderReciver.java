@@ -1,6 +1,6 @@
 package Server;
 
-public class SenderReciever {
+public class SenderReciver {
     //Attributi
     private String messaggioInAttesa;
     private String ipDestinatario;
