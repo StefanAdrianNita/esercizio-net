@@ -1,10 +1,27 @@
 # esercizio-net
 
-## Team
-    1. Davide Antonica
-    2. Stefan Adrian Nita
-    3. Eduard Lucas
-    4. Luca Tommasi
+### Team
+- Davide Antonica
+- Stefan Adrian Nita
+- Eduard Lucas
+- Luca Tommasi
 
-##
+### Suddivisione lavoro
+
+#### Package Server
+
+- Server.java -- Eduard Lucas (Co. Nita)
+- ServerThread.java -- Davide Antonica
+- SenderReciever.java -- Luca Tommasi (Co. Antonica)
+
+#### Package Client
+
+- Client.java -- Stefan Adrian Nita
+- Sender.java -- Stefan Adrian Nita
+- Reciever.java -- Stefan Adrian Nita
+
+#### Progettazione e gestione
+
+- Stefan Adrian Nita
+- Davide Antonica
  
