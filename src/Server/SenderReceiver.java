@@ -20,14 +20,14 @@ public class SenderReceiver {
     int i=-1;
     while(ip!=null && ip!=ipDestinatario){
     i=i++;
-    ip=Server.lista[i].getip();
+    ip=Server.lista[i].getIp();
 }
     if(ip==ipDestinatario){
     Server.lista[i].inviaMessaggio("Sent RECIVE FROM "+ipMittente+" "+messaggioInAttesa);
     i=-1;
     while(ip!=ipMittente){
     i=i++;
-    ip=Server.lista[i].getip();
+    ip=Server.lista[i].getIp();
     }
     Server.lista[i].inviaMessaggio("Sent MESSAGE SENT");
 }
@@ -35,7 +35,7 @@ public class SenderReceiver {
     i=-1;
     while(ip!=ipMittente){
         i=i++;
-        ip=Server.lista[i].getip();
+        ip=Server.lista[i].getIp();
         }
         if(ip==null)Server.lista[i].inviaMessaggio("sent HOST UNREACHABLE");
     }  
