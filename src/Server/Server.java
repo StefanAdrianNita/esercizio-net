@@ -28,11 +28,11 @@ public class Server {
         minimo = scan.nextInt();
         System.out.print("Inserisci IP massimo: ");
         massimo = scan.nextInt();
+        int numeroip=massimo-minimo;
+        lista = new ServerThread[numeroip];
+        listaLibero = new Boolean[numeroip];
 
-        lista = new ServerThread[massimo-minimo];
-        listaLibero = new Boolean[massimo-minimo];
-
-        for(short i=0; i<(massimo-minimo); i++){
+        for(short i=0; i<(numeroip); i++){
             listaLibero[i] = true;
         }
 
@@ -53,6 +53,9 @@ public class Server {
                     }
                     else{
                         i++;
+                    if(i>numeroip){
+                    
+                    }
                     }
                 }while(!eraLibero);
 

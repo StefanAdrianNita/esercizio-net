@@ -47,8 +47,7 @@ try
     BufferedReader br=new BufferedReader(new
     InputStreamReader(socket.getInputStream()));
     pw=new PrintWriter(socket.getOutputStream());
-
-    pw.println("\n messaggio di test");
+    pw.println("\n Ip assigned "+ClientIp);
     pw.flush();
 
 while(!fine){
@@ -58,6 +57,9 @@ while(!fine){
         if(msg!=null)
             sr.riceviDaMittente(msg, ClientIp);
 }
+//if(msg.equals("Lista")||msg.equals("lista")||msg.equals("LISTA")){
+
+//}
     br.close(); pw.close(); socket.close();
 }
     catch(IOException e){System.out.println("Problema di rete");}
