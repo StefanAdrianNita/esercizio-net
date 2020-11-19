@@ -25,7 +25,6 @@ public String getIp(){                      //Serve per ottenere l'ip dato che Ã
 
 public void Stop(){                         //Ferma il Server e libera l'indirizzo ip
     inviaMessaggio("SENT TIMEOUT");
-    fine=true;
     ClientIp=null;
 }
 
