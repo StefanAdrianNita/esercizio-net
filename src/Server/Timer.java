@@ -13,7 +13,7 @@ public class Timer extends Thread {
     public void run() {                     //Crea tramite uno sleep un timer 30s e poi fermare il server
 
         try {
-            Thread.sleep(3000);
+            Thread.sleep(30000);
         } catch (InterruptedException e) {}
         s.Stop();
     }

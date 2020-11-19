@@ -31,13 +31,15 @@ public void Stop(){                         //Ferma il Server e libera l'indiriz
 public void inviaMessaggio(String msg2){    //Invia un messaggio al Client collegato
     t=new Timer(this);t.start();
     int num=msg2.indexOf(" ");
-    msg2.substring(num+1);
+    msg2 = msg2.substring(num+1);
     pw.println(msg2);
+    pw.flush();
 }
 
 
 public void run()                           //Crea il Timer,il BufferedReader e il PrintWriter,gestisce i vari messaggi
 {
+
     fine=false;
     t=new Timer(this);t.start();
 try
@@ -45,6 +47,10 @@ try
     BufferedReader br=new BufferedReader(new
     InputStreamReader(socket.getInputStream()));
     pw=new PrintWriter(socket.getOutputStream());
+
+    pw.println("\n messaggio di test");
+    pw.flush();
+
 while(!fine){
     msg=br.readLine();
     if(msg.equals("quit")||msg.equals("Quit")||msg.equals("QUIT"))
