@@ -22,6 +22,6 @@ public class Client {
             sender.start();
             reciever.start();
 
-        }catch(Exception e){};
+        }catch(Exception e){}
     }
 }

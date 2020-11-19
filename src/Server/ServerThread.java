@@ -29,7 +29,6 @@ public void Stop(){                         //Ferma il Server e libera l'indiriz
 }
 
 public void inviaMessaggio(String msg2){    //Invia un messaggio al Client collegato
-    t=new Timer(this);t.start();
     int num=msg2.indexOf(" ");
     msg2 = msg2.substring(num+1);
     pw.println(msg2);
@@ -54,8 +53,10 @@ while(!fine){
     msg=br.readLine();
     if(msg.equals("quit")||msg.equals("Quit")||msg.equals("QUIT"))
         fine=true;
-        if(msg!=null)
+        if(msg!=null){
             sr.riceviDaMittente(msg, ClientIp);
+            t=new Timer(this);t.start();
+        }
 }
 //if(msg.equals("Lista")||msg.equals("lista")||msg.equals("LISTA")){
 

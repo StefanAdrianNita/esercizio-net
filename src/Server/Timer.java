@@ -11,7 +11,7 @@ public class Timer extends Thread {
     }
 
     public void run() {                     //Crea tramite uno sleep un timer 30s e poi fermare il server
-
+        System.out.println("Avvio Timer");
         try {
             Thread.sleep(30000);
         } catch (InterruptedException e) {}
