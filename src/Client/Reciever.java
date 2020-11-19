@@ -21,10 +21,16 @@ public class Reciever extends Thread{
             is = s.getInputStream();
             isr = new InputStreamReader(is);
             br = new BufferedReader(isr);
-            while(true) {
+            boolean loop=true;
+            while(loop) {
                 String inEntrata = br.readLine();
+                if(inEntrata=="Quit"||inEntrata=="QUIT"||inEntrata=="quit"){
+                loop=false;
+                }
+                else{
                 System.out.println("  " + inEntrata);
             }
+        }
         }
         catch(Exception e){}
     }

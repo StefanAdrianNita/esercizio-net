@@ -13,6 +13,7 @@ public class ServerThread extends Thread
     private SenderReciever sr=new SenderReciever();
     private PrintWriter pw;
     private boolean fine;
+    private int posizione;
 
                                             //Metodi+Costruttore
 
@@ -48,19 +49,59 @@ try
     pw=new PrintWriter(socket.getOutputStream());
     pw.println("\n Ip assigned "+ClientIp);
     pw.flush();
-
+posizione=sr.getPosizione(ClientIp);
 while(!fine){
     msg=br.readLine();
-    if(msg.equals("quit")||msg.equals("Quit")||msg.equals("QUIT"))
-        fine=true;
-        if(msg!=null){
+    if(msg.equals("quit")||msg.equals("Quit")||msg.equals("QUIT")){
+        ClientIp=null;
+        fine=true;}
+        if(msg.equals("quit")&& ClientIp==null||msg.equals("Quit")&& ClientIp==null||msg.equals("QUIT")&& C){
+            Server.inserisci(posizione);
+            ClientIp=null;
+            fine=true;}
+
+if(msg.equals("Lista")||msg.equals("lista")||msg.equals("LISTA")){
+    String temp;
+    int i=-1;
+        boolean loop;
+     do{
+    loop=true;
+    i++;
+    temp=Server.lista[i].getIp();
+    if(temp==null){
+    loop=false;
+}
+}while(loop);
+}
+if(msg.equals("Lista") && ClientIp==null||msg.equals("lista") && ClientIp==null||msg.equals("LISTA") && ClientIp==null){
+    String temp;
+    int i=-1;
+        boolean loop;
+     do{
+    loop=true;
+    i++;
+    temp=Server.lista[i].getIp();
+    if(temp==null){
+    loop=false;
+}
+t=new Timer(this);t.start();
+}
+while(loop);
+
+}
+
+else{
+if(msg!=null){
             sr.riceviDaMittente(msg, ClientIp);
             t=new Timer(this);t.start();
         }
+        if(msg!=null && ClientIp == null) {
+        Server.inserisci(posizione);
+        sr.riceviDaMittente(msg, ClientIp);
+        t=new Timer(this);t.start();
+        }
+    }
 }
-//if(msg.equals("Lista")||msg.equals("lista")||msg.equals("LISTA")){
-
-//}
     br.close(); pw.close(); socket.close();
 }
     catch(IOException e){System.out.println("Problema di rete");}

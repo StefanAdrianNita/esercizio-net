@@ -8,13 +8,36 @@ public class Server {
     private static int minimo, massimo;
     private static int idVettore = 0;
     private static int idIP = idVettore+minimo;
-
     public static ServerThread[] lista;
     public static Boolean[] listaLibero;
+    private static int numeroip;
 
+    public static void inserisci(int posizione) {
+        ServerSocket s;
+        PrintWriter pw;
+        System.out.println("IN ASCOLTO...");
+        Socket socket = s.accept();
+        int i = 0;
+        boolean eraLibero = false;
+        do {
+            if (listaLibero[i]) {
+                lista[posizione] = new ServerThread(socket, ("192.168.1." + (i + minimo)));
+                lista[i].start();
+                listaLibero[i] = false;
+                eraLibero = true;
+            } else {
+                i++;
+            }
+            if (i > numeroip) {
+                pw.println("CONN_REFUSED");
+                i = 0;
+            }
+        } while (!eraLibero);
 
-    public static void main(String[] args){
-        int port=6500;
+    }
+
+    public static void main(String[] args) {
+        int port = 6500;
         ServerSocket s;
         InputStream is;
         InputStreamReader isr;
@@ -28,7 +51,7 @@ public class Server {
         minimo = scan.nextInt();
         System.out.print("Inserisci IP massimo: ");
         massimo = scan.nextInt();
-        int numeroip=massimo-minimo;
+        numeroip = massimo - minimo;
         lista = new ServerThread[numeroip];
         listaLibero = new Boolean[numeroip];
 
@@ -53,9 +76,9 @@ public class Server {
                     }
                     else{
                         i++;
-                    if(i>numeroip){
-                    
-                    }
+                    }if(i>numeroip){
+                    pw.println("CONN_REFUSED");
+                        i=0;
                     }
                 }while(!eraLibero);
 

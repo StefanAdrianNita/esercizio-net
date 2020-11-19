@@ -20,12 +20,14 @@ public class Sender extends Thread{
         try{
             os = s.getOutputStream();
             pw = new PrintWriter(os);
-
-            while(true) {
+            boolean loop=true;
+            while(loop) {
                 System.out.print(">> ");
                 Scanner scan = new Scanner(System.in);
                 String messaggio = scan.nextLine();
-
+                if(messaggio=="quit"||messaggio=="Quit"||messaggio=="QUIT"){
+                loop=false;
+                }
                 pw.println(messaggio);
                 pw.flush();
             }
