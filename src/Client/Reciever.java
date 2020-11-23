@@ -29,9 +29,10 @@ public class Reciever extends Thread{
                 }
                 else{
                 System.out.println("  " + inEntrata);
-            }
         }
         }
-        catch(Exception e){}
     }
+        catch(Exception e){}
+    
+}
 }

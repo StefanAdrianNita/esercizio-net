@@ -1,5 +1,4 @@
 package Server;
-
 public class Timer extends Thread {
                                             //Attributi
     ServerThread s;

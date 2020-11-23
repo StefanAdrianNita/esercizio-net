@@ -1,5 +1,4 @@
 package Server;
-
 import java.net.*;
 import java.io.*;
 import java.util.*;
@@ -11,40 +10,41 @@ public class Server {
     public static ServerThread[] lista;
     public static Boolean[] listaLibero;
     private static int numeroip;
+    private static Socket socket;
+private static PrintWriter pw;
 
-    public static void inserisci(int posizione) {
-        ServerSocket s;
-        PrintWriter pw;
-        System.out.println("IN ASCOLTO...");
-        Socket socket = s.accept();
-        int i = 0;
-        boolean eraLibero = false;
-        do {
-            if (listaLibero[i]) {
-                lista[posizione] = new ServerThread(socket, ("192.168.1." + (i + minimo)));
-                lista[i].start();
-                listaLibero[i] = false;
-                eraLibero = true;
-            } else {
-                i++;
-            }
-            if (i > numeroip) {
-                pw.println("CONN_REFUSED");
-                i = 0;
-            }
-        } while (!eraLibero);
+public static void inserisci(int posizione) throws IOException {
+    ServerSocket s=new ServerSocket();
+System.out.println("IN ASCOLTO...");
+    socket = s.accept();
+    int i = 0;
+    boolean eraLibero = false;
+    do {
+        if (listaLibero[i]) {
+            lista[posizione] = new ServerThread(socket, ("192.168.1." + (i + minimo)));
+            lista[i].start();
+            listaLibero[i] = false;
+            eraLibero = true;
+        } else {
+            i++;
+        }
+        if (i > numeroip) {
+            pw.println("CONN_REFUSED");
+            i = 0;
+        }
+    } while (!eraLibero);
 
-    }
+}
 
-    public static void main(String[] args) {
-        int port = 6500;
-        ServerSocket s;
-        InputStream is;
-        InputStreamReader isr;
-        BufferedReader br;
+public static void main(String[] args) throws IOException {
+    int port = 6500;
+    ServerSocket s;
+    InputStream is;
+    InputStreamReader isr;
+    BufferedReader br;
 
-        OutputStream os;
-        PrintWriter pw;
+    OutputStream os = socket.getOutputStream();
+    pw = new PrintWriter(os);
 
         System.out.print("Inserisci IP minimo: ");
         Scanner scan = new Scanner(System.in);
@@ -64,7 +64,6 @@ public class Server {
             while(true){
                 System.out.println("IN ASCOLTO...");
                 Socket socket = s.accept();
-
                 int i=0;
                 boolean eraLibero = false;
                 do{

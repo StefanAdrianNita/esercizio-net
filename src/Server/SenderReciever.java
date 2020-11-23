@@ -1,5 +1,4 @@
 package Server;
-
 public class SenderReciever {
     //ATTRIBUTI
     private String messaggioInAttesa;

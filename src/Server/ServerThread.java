@@ -54,7 +54,7 @@ while(!fine){
     if(msg.equals("quit")||msg.equals("Quit")||msg.equals("QUIT")){
         ClientIp=null;
         fine=true;}
-        if(msg.equals("quit")&& ClientIp==null||msg.equals("Quit")&& ClientIp==null||msg.equals("QUIT")&& C){
+        if(msg.equals("quit")&& ClientIp==null||msg.equals("Quit")&& ClientIp==null||msg.equals("QUIT")&& ClientIp==null){
             Server.inserisci(posizione);
             ClientIp=null;
             fine=true;}
