@@ -1,4 +1,5 @@
 # esercizio-net
+(This repoistory was just to host a group homework for school, please ignore)
 
 ### Team
 - Davide Antonica
